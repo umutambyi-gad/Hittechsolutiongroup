@@ -3,6 +3,6 @@ from . import views
 
 
 app_name = 'servicespage'
-urlspatterns = [
+urlpatterns = [
     path('', views.service, name='services')
 ]
