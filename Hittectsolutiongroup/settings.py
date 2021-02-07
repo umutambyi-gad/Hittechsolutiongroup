@@ -56,7 +56,15 @@ ROOT_URLCONF = 'Hittectsolutiongroup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'Homepage/templates'),
+            os.path.join(BASE_DIR, 'Aboutpage/templates'),
+            os.path.join(BASE_DIR, 'Servicespage/templates'),
+            os.path.join(BASE_DIR, 'Memberspage/templates'),
+            os.path.join(BASE_DIR, 'Blogpage/templates'),
+            os.path.join(BASE_DIR, 'Contactpage/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
