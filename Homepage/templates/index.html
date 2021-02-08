@@ -82,7 +82,7 @@
     {% for recent_blog in recent_blogs %}
     <div class="col-md-6 col-lg-4 ftco-animate mt-4 mb-4">
       <div class="blog-entry">
-        <a href="{% url 'blogpage:blog' %}{{ recent_blog.id }}/{{ recent_blog.slug }}" class="block-20 d-flex align-items-end" style="background-image: url({{ recent_blog.blog_thumbnail.url  }});">
+        <a href="{{ recent_blog.get_absolute_url }}" class="block-20 d-flex align-items-end" style="background-image: url({{ recent_blog.blog_thumbnail.url  }});">
 						<div class="meta-date text-center p-2">
             <span class="day">{{ recent_blog.blog_added_date.day }}</span>
             <span class="mos">{{ suffer }}</span>
@@ -90,13 +90,13 @@
           </div>
         </a>
         <div class="blog-cards text p-4">
-          <h3 class="heading"><a href="{% url 'blogpage:blog' %}{{ recent_blog.blog_title }}">{{ recent_blog.blog_title }}</a></h3>
+          <h3 class="heading"><a href="{{ recent_blog.get_absolute_url }}">{{ recent_blog.blog_title }}</a></h3>
           <p>{{ recent_blog.blog_short_description }}</p>
           <div class="d-flex align-items-center mt-4">
-              <p class="mb-0"><a href="{% url 'blogpage:blog' %}{{ recent_blog.id }}/{{ recent_blog.slug }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+              <p class="mb-0"><a href="{{ recent_blog.get_absolute_url }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
               <p class="ml-auto mb-0">
               	<a {% if recent_blog.user.username != 'Anonymous' %}href="#"{% endif %} {% if recent_blog.user.username == 'Anonymous' %}style="color: grey;"{% endif %} class="mr-2">{{recent_blog.user.username}}</a>
-              	<a href="{% url 'blogpage:blog' %}{{recent_blog.blog_title}}#comment-section" class="meta-chat"><span class="fa fa-comment-alt"></span>&nbsp;<span>{{ recent_blog.rootcomments_set.all.count }}</span></a>
+              	<a href="{{ recent_blog.get_absolute_url }}#comment-section" class="meta-chat"><span class="fa fa-comment-alt"></span>&nbsp;<span>{{ recent_blog.rootcomments_set.all.count }}</span></a>
               </p>
           </div>
         </div>

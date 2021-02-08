@@ -19,7 +19,7 @@
       {% for blog in blogs %}
       <div class="col-md-6 col-lg-4 ftco-animate mt-4 mb-4">
         <div class="blog-entry">
-          <a href="{{ blog.id }}/{{ blog.slug }}" class="block-20 d-flex align-items-end" style="background-image: url({{ blog.blog_thumbnail.url  }});">
+          <a href="{{ blog.get_absolute_url }}" class="block-20 d-flex align-items-end" style="background-image: url({{ blog.blog_thumbnail.url  }});">
 						<div class="meta-date text-center p-2">
               <span class="day">{{ blog.blog_added_date.day }}</span>
               <span class="mos">{{ suffer }}</span>
@@ -27,13 +27,13 @@
             </div>
           </a>
           <div class="blog-cards text p-4">
-            <h3 class="heading"><a href="#">{{ blog.blog_title }}</a></h3>
+            <h3 class="heading"><a href="{{ blog.get_absolute_url }}">{{ blog.blog_title }}</a></h3>
             <p>{{ blog.blog_short_description }}</p>
             <div class="d-flex align-items-center mt-4">
-              <p class="mb-0"><a href="{{ blog.id }}/{{ blog.slug }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+              <p class="mb-0"><a href="{{ blog.get_absolute_url }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
               <p class="ml-auto mb-0">
               	<a {% if blog.user.username != 'Anonymous' %}href="#"{% endif %} {% if blog.user.username == 'Anonymous' %}style="color: grey;"{% endif %} class="mr-2">{{blog.user.username}}</a>
-              	<a href="#" class="meta-chat"><span class="fa fa-comment-alt"></span> {{ blog.rootcomments_set.all.count }}</a>
+              	<a href="{{ blog.get_absolute_url }}#comment-section" class="meta-chat"><span class="fa fa-comment-alt"></span> {{ blog.rootcomments_set.all.count }}</a>
               </p>
             </div>
           </div>
