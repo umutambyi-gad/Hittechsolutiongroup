@@ -3,6 +3,7 @@ from . import views
 
 
 app_name = 'servicespage'
+
 urlpatterns = [
-    path('', views.service, name='services')
+	path('', views.service, name='services'),
 ]

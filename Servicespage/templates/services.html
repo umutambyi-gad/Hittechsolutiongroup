@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Our Services{% endblock %}
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url({{ breadcrumb.breadcrumb_image.url }});">
+<div class="container">
+<div class="row no-gutters slider-text align-items-center justify-content-center">
+  <div class="col-md-9 ftco-animate text-center">
+    <h1 class="mb-2 bread">Our services</h1>
+    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'homepage:home' %}">Home <i class="fa fa-angle-double-right"></i></a></span> <span>Our services<i class="fa fa-angle-double-right"></i></span></p>
+  </div>
+</div>
+</div>
+</section>
+
+{% if services_section and services %}
+<div class="container-x mt-5 mb-5">
+	<div class="session-title">
+        <h2>{{ services_section.heading }}</h2>
+        <p>{{ services_section.short_decription }}</p>
+    </div>
+	<div class="row">
+	{% for service in services %}
+	<div class="card col-lg-5 ml-auto mr-auto">
+		<div class="imgBx">
+			<i class="{{ service.icon }}"></i>
+		</div>
+		<div class="content">
+			<div>
+				<h3>{{ service.service_title }}</h3>
+				<p class="text-justify">{{ service.service_description }}</p>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% if feature_section and key_features %}
+<div class="key-features container-fluid darkening justify-content-center" style="background-color: #19244c !important;">
+    <div class="container ">
+        <div class="session-title row">
+            <h2>{{ feature_section.heading }}</h2>
+            <p>{{ feature_section.short_decription }}</p>
+        </div>
+        <div class="key-row row">
+        	{% for key_feature in key_features %}
+            <div class="col-md-3">
+                <div class="key-single">
+                    <i class="{{ key_feature.icon }}"></i>
+                    <h6>{{ key_feature.feature_title }}</h6>
+                    <p>{{ key_feature.feature_description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
