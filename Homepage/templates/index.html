@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="home-slider owl-carousel">
+  {% for background in backgrounds %}
+  <div class="slider-item" style="background-image:url({{ background.background_image.url }});">
+  	<div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
+      <div class="col-md-6 ftco-animate">
+        <h1 class="mb-4">{{ background.background_title }}</h1>
+        <p>{{ background.background_description_paragraph }}</p>
+        <p><a href="{% url 'contactpage:contact' %}" class="btn btn-primary px-4 py-3 mt-3">Contact Us</a></p>
+      </div>
+    </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="ftco-services ftco-no-pb">
+    <div class="container-wrap">
+      <div class="row no-gutters">
+      {% for service in services %}
+      <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate {% cycle 'bg-darken' 'bg-darkening' %}">
+        <div class="media block-6 d-block text-center">
+          <div class="icon d-flex justify-content-center align-items-center">
+            <span class="{{ service.service_flaticon_class }}"></span>
+          </div>
+          <div class="media-body p-2 mt-3">
+            <h3 class="heading">{{ service.service_title }}</h3>
+            <p>{{ service.service_description_paragraph }}</p>
+          </div>
+        </div>      
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+  </section>
+
+	
+  {% if offer_section and we_offer %}
+	<section class="darkening ftco-section ftco-no-pt ftc-no-pb">
+		<div class="container">
+			<div class="row d-flex">
+				<div class="col-md-5 order-md-last wrap-about wrap-about d-flex align-items-stretch">
+					<div class="img" style="background-image: url({{ offer_section.section_aside_image.url }}); border"></div>
+				</div>
+				<div class="col-md-7 wrap-about py-5 pr-md-4 ftco-animate">
+      	<h2 class="mb-4">{{ offer_section.section_heading }}</h2>
+					<p>{{ offer_section.section_description_paragraph }}</p>
+					<div class="row mt-5">
+            {% for offers in we_offer %}
+						<div class="col-lg-6">
+							<div class="services-2 d-flex">
+								<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="{{ offers.offer_flaticon_class }}"></span></div>
+								<div class="text pl-3">
+									<h3>{{ offers.offer_title }}</h3>
+									<p>{{ offers.offer_description }}</p>
+								</div>
+							</div>
+						</div>
+            {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+  {% endif %}
+
+{% if recent_blogs %}
+<section class="ftco-section darkening">
+	<div class="container">
+		<div class="row justify-content-center mb-5 pb-2">
+    <div class="col-md-8 text-center heading-section ftco-animate">
+      <h2 class="mb-4"><span>Recent</span> Blogs</h2>
+      <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
+    </div>
+  </div>
+		<div class="row">
+    {% for recent_blog in recent_blogs %}
+    <div class="col-md-6 col-lg-4 ftco-animate mt-4 mb-4">
+      <div class="blog-entry">
+        <a href="{% url 'blogpage:blog' %}{{ recent_blog.id }}/{{ recent_blog.slug }}" class="block-20 d-flex align-items-end" style="background-image: url({{ recent_blog.blog_thumbnail.url  }});">
+						<div class="meta-date text-center p-2">
+            <span class="day">{{ recent_blog.blog_added_date.day }}</span>
+            <span class="mos">{{ suffer }}</span>
+            <span class="yr">{{ recent_blog.blog_added_date.year }}</span>
+          </div>
+        </a>
+        <div class="blog-cards text p-4">
+          <h3 class="heading"><a href="{% url 'blogpage:blog' %}{{ recent_blog.blog_title }}">{{ recent_blog.blog_title }}</a></h3>
+          <p>{{ recent_blog.blog_short_description }}</p>
+          <div class="d-flex align-items-center mt-4">
+              <p class="mb-0"><a href="{% url 'blogpage:blog' %}{{ recent_blog.id }}/{{ recent_blog.slug }}" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+              <p class="ml-auto mb-0">
+              	<a {% if recent_blog.user.username != 'Anonymous' %}href="#"{% endif %} {% if recent_blog.user.username == 'Anonymous' %}style="color: grey;"{% endif %} class="mr-2">{{recent_blog.user.username}}</a>
+              	<a href="{% url 'blogpage:blog' %}{{recent_blog.blog_title}}#comment-section" class="meta-chat"><span class="fa fa-comment-alt"></span>&nbsp;<span>{{ recent_blog.rootcomments_set.all.count }}</span></a>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+	</div>
+</section>
+{% endif %}
+
+{% if testimonial_section and testimonies %}
+<section class="darkening ftco-section testimony-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5 pb-2">
+      <div class="col-md-8 text-center heading-section ftco-animate">
+        <h2 class="mb-4">{{ testimonial_section.testimonial_heading }}</h2>
+        <p>{{ testimonial_section.testimonial_description_paragraph }}</p>
+      </div>
+    </div>
+    <div class="row ftco-animate justify-content-center">
+      <div class="col-md-12">
+        <div class="carousel-testimony owl-carousel">
+          {% for testimony in testimonies %}
+          <div class="item">
+            <div class="testimony-wrap d-flex">
+              <div class="user-img mr-4" style="background-image: url({{ testimony.user.members.member_image.url }})">
+              </div>
+              <div class="text ml-2">
+              	<span class="quote d-flex align-items-center justify-content-center">
+                  <i class="fa fa-quote-left"></i>
+                </span>
+                <p>{{ testimony.testimony }}</p>
+                <p class="name">{{ testimony.user.get_full_name }}</p>
+                <span class="position">{{ testimony.user.members.member_position }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if user.is_authenticated and testimonial_adding %}
+<section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url({{ testimonial_adding.testimonial_background.url }});">
+	<div class="container">
+		<div class="row justify-content-end">
+			<div class="col-md-6 py-5 px-md-5">
+				<div class="py-md-5">
+	          <div class="heading-section heading-section-white ftco-animate mb-5">
+	            <h2 class="mb-4">{{testimonial_adding.testimony_section_heading}}</h2>
+	            <p>{{ testimonial_adding.testimony_section_description_paragraph }}</p>
+	          </div>
+	          <form action="{% url 'homepage:home' %}" class="appointment-form ftco-animate" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+	    				<div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <textarea cols="30" rows="5" class="form-control" placeholder="Message here" name="message" required></textarea>
+                </div>
+              </div>
+	    				<div class="col-lg-5 ml-auto mt-2">
+		            <div class="form-group ml-md-4">
+		              <input type="submit" value="Post" class="btn btn-primary py-3 px-4">
+		            </div>
+	    				</div>
+	    			</form>
+	    		</div>
+			</div>
+    </div>
+	</div>
+</section>
+{% endif %}
+{% if galleries %}
+<section class="ftco-gallery">
+	<div class="container-wrap">
+		<div class="row no-gutters">
+      {% for gallery in galleries %}
+				<div class="col-md-3 ftco-animate">
+					<a href="{{ gallery.image.url }}" class="gallery image-popup img d-flex align-items-center" style="background-image: url({{ gallery.image.url }});">
+						<div class="icon mb-4 d-flex align-items-center justify-content-center">
+						<span class="fab fa-instagram"></span>
+					</div>
+					</a>
+				</div>
+				{% endfor %}
+    </div>
+	</div>
+</section>
+{% endif %}
+{% endblock %}
