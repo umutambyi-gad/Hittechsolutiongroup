@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Blog - {{blog.blog_title}}{% endblock %}
+{% block blog-active %}active{% endblock %}
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url({% if breadcrumb.breadcrumb_image.url != '' %}{{ breadcrumb.breadcrumb_image.url }}{% else %}{% static 'images\\default.jpg' %}{% endif %});">
+ <div class="container">
+  <div class="row no-gutters slider-text align-items-center justify-content-center">
+   <div class="col-md-9 ftco-animate text-center">
+    <h1 class="mb-2 bread">
+     Blog Single
+    </h1>
+    <p class="breadcrumbs">
+     <span class="mr-2">
+      <a href="{% url 'homepage:home' %}">
+       Home
+       <i class="fa fa-angle-double-right">
+       </i>
+      </a>
+     </span>
+     <span class="mr-2">
+      <a href="{% url 'blogpage:blog' %}">
+       Blog
+       <i class="fa fa-angle-double-right">
+       </i>
+      </a>
+     </span>
+     <span>
+      Blog Single
+      <i class="fa fa-angle-double-right">
+      </i>
+     </span>
+    </p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="darkening ftco-section">
+ <div class="container">
+  <div class="row">
+   {% if blog %}
+   <div class="col-lg-8 ftco-animate">
+    <h2 class="mb-3">
+     {{ blog.blog_title }}
+    </h2>
+    {{ contents|safe }}
+    <div class="tag-widget post-tag-container mb-5 mt-5">
+     <div class="tagcloud">
+      {% for tags in blog.blog_tag.all %}
+      <a class="tag-cloud-link" href="#">
+       {{ tags.tag }}
+      </a>
+      {% comment %}
+      blogs_tagged = Blog.objects.filter(blog_tag__tag='tag_here')
+      {% endcomment %}
+      {% endfor %}
+     </div>
+    </div>
+    {% if blog.user.username != 'Anonymous' %}
+    <div class="row about-author d-flex p-4 blog-cards">
+     <div class="col-sm-12 col-md-5 bio">
+      <img alt="Image placeholder" class="img-fluid mb-4" src="{{ blog.user.members.member_image.url }}"/>
+     </div>
+     <div class="col-sm-12 col-md-7 desc">
+      <h3>
+        <strong>
+        {{ blog.user.get_full_name }}
+        </strong>
+      </h3>
+      <p class="text-justify">
+       {{ blog.user.members.about_member }}.
+       <br/>
+       <br/>
+       <b>
+        Why I wrote this blog?
+       </b>
+       <br/>
+       <br/>
+       {{ blog.blog_author_description }}
+      </p>
+     </div>
+    </div>
+    {% endif %}
+    <div class="pt-5 mt-5">
+     <h3 class="mb-5 h4 font-weight-bold">
+      <!--{ blog.rootcomments_set.all.count }-->
+      {{ blog.rootcomments_set.all.count }} Comments
+     </h3>
+     <ul class="comment-list" id="comment-section">
+      {% for root_comment in blog.rootcomments_set.all %}
+      <li class="comment">
+       <div class="vcard bio">
+        <a href="{{ root_comment.user.members.member_image.url }}" target="_blank">
+         <img alt="Image placeholder" height="53" src="{{ root_comment.user.members.member_image.url }}" width="50"/>
+        </a>
+       </div>
+       <div class="comment-body">
+        <h3>
+         {{ root_comment.user.username }}
+        </h3>
+        <div class="meta mb-2">
+         {{ root_comment.added_date.date }} at {{ root_comment.added_date.time }}
+        </div>
+        <p>
+         {{ root_comment.commentor_message }}
+        </p>
+        <p>
+         <a class="reply {{ root_comment.id }} {% if not user.is_authenticated %}notAuthenticated{% endif %}" href="#comment">
+          Reply
+         </a>
+        </p>
+        {% if root_comment.replycomments_set.all %}
+        <a class="showReplies">Show replies</a>
+        {% endif %}
+       </div>
+      {% for reply in root_comment.replycomments_set.all %}
+       <ul class="children">
+        <li class="comment">
+         <div class="vcard bio">
+            <img alt="Image placeholder" src="
+            {% if reply.user.members.member_image.url != '' %}
+              {{ reply.user.members.member_image.url }}
+            {% else %}
+              {% static 'images\default.jpg' %}
+            {% endif %}
+            " width="50" height="53" />
+         </div>
+         <div class="comment-body">
+          <h3>
+           {{ reply.user.username }}
+          </h3>
+          <div class="meta mb-2">
+           {{ reply.added_date.date }} at {{ reply.added_date.time }}
+          </div>
+          <p>
+           {{ reply.commentor_message }}
+          </p>
+          <p>
+           <a class="reply {{ root_comment.id }} {% if not user.is_authenticated %}notAuthenticated{% endif %}" href="#comment">
+            Reply
+           </a>
+          </p>
+         </div>
+        </li>
+       </ul>
+       {% endfor %}
+      </li>
+      {% endfor %}
+     </ul>
+     <!-- END comment-list -->
+     <div class="comment-form-wrap pt-5" id="comment">
+      <h3 class="mb-5 h4 font-weight-bold">
+       Leave a comment
+      </h3>
+      <div id="form" class="p-5 blog-cards">
+       {% csrf_token %}
+       <div class="form-group">
+        <label for="message">
+         Message
+        </label>
+        <textarea class="form-control" cols="30" id="message" name="message" required="" rows="10"></textarea>
+       </div>
+       <div class="form-group">
+        <input id="postcomment" class="btn py-3 px-4 btn-primary {% if not user.is_authenticated %}notAuthenticated{% endif %}" type="submit" value="Post Comment"/>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- .col-md-8 -->
+   {% endif %}
+   <div class="col-lg-4 sidebar ftco-animate">
+    <div class="sidebar-box">
+     <form action="#" class="search-form">
+      <div class="form-group">
+       <span class="icon icon-search">
+       </span>
+       <input class="form-control" placeholder="Type a keyword here..." type="text"/>
+      </div>
+     </form>
+    </div>
+    <div class="sidebar-box ftco-animate">
+     <h3>
+      Category
+     </h3>
+     <ul class="categories">
+      {% for category in categories %}
+      <li>
+       <a class="{{ blog.blog_category.category }}" href="#">
+        {{ category }}
+        <span>
+         ({{ category.blogs_set.count }})
+        </span>
+       </a>
+      </li>
+      {% comment %}
+      blogs_categoriesed = Blog.objects.filter(blogs_category__category='category_here')
+      {% endcomment %}
+      {% endfor %}
+     </ul>
+    </div>
+    <div class="sidebar-box ftco-animate">
+     <h3>
+      Popular Articles
+     </h3>
+     {% for blog in blogs %}
+     <div class="block-21 mb-4 d-flex">
+      <a class="blog-img mr-4" href="{% url 'blogpage:blog' %}{{ blog.id }}/{{ blog.slug }}" style="background-image: url({{ blog.blog_thumbnail.url }});">
+      </a>
+      <div class="text">
+       <h3 class="heading">
+        <a href="{% url 'blogpage:blog' %}{{ blog.id }}/{{ blog.slug }}">
+         {{ blog.blog_short_description }}
+        </a>
+       </h3>
+       <div class="meta">
+        <div>
+         <a href="#">
+          <span class="fa fa-calendar-alt">
+          </span>
+          {{ blog.blog_added_date.date }}
+         </a>
+        </div>
+        <div>
+         <a>
+          <span class="fa fa-user">
+          </span>
+          {{ blog.user.get_full_name }}
+         </a>
+        </div>
+        <div>
+         <a href="#">
+          <span class="fa fa-comment-alt">
+          </span>
+          {{ blog.rootcomments_set.count }}
+         </a>
+        </div>
+       </div>
+      </div>
+     </div>
+     {% endfor %}
+    </div>
+   </div>
+   <!-- END COL -->
+  </div>
+ </div>
+</section>
+{% endblock %}
