@@ -3,3 +3,4 @@ migrations/
 .env
 db.sqlite3
 *.log
+assets
