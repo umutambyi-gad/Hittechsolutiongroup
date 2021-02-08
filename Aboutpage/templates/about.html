@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url({{ breadcrumb.breadcrumb_image.url }});">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <h1 class="mb-2 bread">About Us</h1>
+        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'homepage:home' %}">Home <i class="fa fa-angle-double-right"></i></a></span> <span>About us <i class="fa fa-angle-double-right"></i></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% if contents_head and contents %}
+<section class="ftco-section ftco-no-pt ftc-no-pb darkening">
+  <div class="container">
+    <div class="row d-flex">
+      <div class="col-md-11 wrap-about py-5 pr-md-4 ftco-animate">
+        <h2 class="mb-4">{{ contents_head }}</h2>
+        {{contents|safe}}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if statistics_section and statistics %}
+<section class="ftco-consult ftco-section ftco-counter" id="section-counter" style="background-image: url({{ statistics_section.background_image.url }});">
+	<div class="container">
+		<div class="row justify-content-center mb-5 pb-2 d-flex">
+      <div class="col-md-12 heading-section heading-section-white ftco-animate pl-lg-5 pt-md-0 pt-5">
+        <h2 class="mb-4 text-justify text-center">{{ statistics_section.title }}</h2>
+        <p>{{ statistics_section.paragraraph }}</p>
+        
+      </div>
+    </div>	
+		<div class="row d-md-flex align-items-center justify-content-center">
+			<div class="col-lg-12">
+				<div class="row d-md-flex align-items-center">
+          {%  for statistic in statistics %}
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+            	<div class="icon"><span class="flaticon-doctor"></span></div>
+              <div class="text">
+                <strong class="number" data-number="{{ statistic.number }}">0</strong>
+                <span>{{ statistic.label }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+	</div>
+</section>
+{% endif %}
+
+<!-- Our social media Here-->
+<div class="social container-fluid">
+   <div class="solical-row row no-margin">
+       <a href="#">
+         <div class="scard fb">
+            <i class="fab fa-facebook-f"></i>
+          </div>
+       </a>
+       <a href="#">
+         <div class="scard tw">
+            <i class="fab fa-twitter"></i>
+          </div>
+       </a>
+       <a href="#">
+         <div class="scard pin">
+            <i class="fab fa-pinterest-p"></i>
+          </div>
+       </a>
+       <a href="#">
+          <div class="scard drib">
+            <i class="fab fa-dribbble"></i>
+          </div>
+       </a>
+       <a href="#">
+          <div class="scard in">
+            <i class="fab fa-linkedin"></i>
+          </div>
+       </a>
+       <a href="#">
+         <div class="scard vim">
+            <i class="fab fa-vimeo"></i>
+          </div>
+       </a>
+       <a href="#">
+          <div class="scard tum">
+            <i class="fab fa-tumblr"></i>
+          </div>
+       </a>
+       <a href="#">
+          <div class="scard you">
+            <i class="fab fa-youtube"></i>
+          </div>
+       </a>
+   </div>
+</div>
+
+{% if galleries %}
+<section class="ftco-gallery">
+  <div class="container-wrap">
+    <div class="row no-gutters">
+      {% for gallery in galleries %}
+        <div class="col-md-3 ftco-animate">
+          <a href="{{ gallery.image.url }}" class="gallery image-popup img d-flex align-items-center" style="background-image: url({{ gallery.image.url }});">
+            <div class="icon mb-4 d-flex align-items-center justify-content-center">
+            <span class="fab fa-instagram"></span>
+          </div>
+          </a>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
