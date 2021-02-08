@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css" integrity="sha512-nIm/JGUwrzblLex/meoxJSPdAKQOe2bLhnrZ81g5Jbh519z8GFJIWu87WAhBH+RAyGbM4+U3S2h+kL5JoV6/wA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
   </head>
   <body>
     <div class="bg-top navbar-light darkening">
@@ -95,7 +95,7 @@
 
     {% block content %}{% endblock %}
     <section class="signin-section">
-    <div class="signin-close" id="close-signin"><i class="fa fa-window-close"></i></div>
+    <div class="signin-close" id="close-signin"><i class="fa fa-times"></i></div>
     <div class="lbox">
         <h2>Sign In</h2>
         <form action="{% url 'memberspage:sign-in' %}" method="POST">
@@ -127,7 +127,7 @@
   </section>
 
   <section class="signup-section">
-    <div class="signup-close" id="close-signup"><i class="fa fa-window-close"></i></div>
+    <div class="signup-close" id="close-signup"><i class="fa fa-times"></i></div>
     <div class="lbox">
         <h2>Sign Up</h2>
         <form id="sign-up-section" action="{% url 'memberspage:sign-up' %}" method="POST">
@@ -182,7 +182,7 @@
 
     {% if user.is_authenticated %}
     <section id="profileset">
-      <div class="profileset-close" id="close-profileset"><i class="fa fa-window-close"></i></div>
+      <div class="profileset-close" id="close-profileset"><i class="fa fa-times"></i></div>
     <div class="main-content mb-5">
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-size: cover; background-position: center top;">
       <!-- Mask -->
@@ -433,6 +433,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-animateNumber/0.0.14/jquery.animateNumber.min.js" integrity="sha512-WY7Piz2TwYjkLlgxw9DONwf5ixUOBnL3Go+FSdqRxhKlOqx9F+ee/JsablX84YBPLQzUPJsZvV88s8YOJ4S/UA==" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/scrollax@1.0.0/scrollax.min.js"></script>
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/main.min.js' %}"></script>
   </body>
 </html>
