@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url({% if breadcrumb.breadcrumb_image.url != '' %}{{ breadcrumb.breadcrumb_image.url }}{% else %}{% static 'images\\default.jpg' %}{% endif %});">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <h1 class="mb-2 bread">Contact Us</h1>
+        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'homepage:home' %}">Home <i class="fa fa-angle-double-right"></i></a></span> <span>Contact <i class="fa fa-angle-double-right"></i></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section contact-section darkening">
+  <div class="container">
+    <div class="row d-flex contact-info">
+      <div class="col-md-4 d-flex">
+        <div class="blog-cards align-self-stretch box p-4 text-center">
+          <h3 class="mb-4">Address</h3>
+          <p>{{address}}</p>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex">
+        <div class="blog-cards align-self-stretch box p-4 text-center">
+          <h3 class="mb-4">Contact Number</h3>
+          <p><a href="tel://{{number}}">{{number}}</a></p>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex">
+        <div class="blog-cards align-self-stretch box p-4 text-center">
+          <h3 class="mb-4">Email Address</h3>
+          <p><a href="mailto:{{email}}">{{email}}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section ftco-no-pt ftco-no-pb contact-section mb-5 mt-5" id="xs">
+  <div class="container">
+    <div class="row d-flex align-items-stretch no-gutters">
+      <div class="col-md-12 p-4 p-md-5 order-md-last blog-cards">
+        <form action="{% url 'contactpage:contact' %}" method="POST">
+          {% csrf_token %}
+          {% if not user.is_authenticated %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Your Name" name="sender_name" required>
+          </div>
+          {% endif %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Your Email" name="sender_email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Subject" name="subject" required>
+          </div>
+          <div class="form-group">
+            <textarea id="" cols="30" rows="7" class="form-control" placeholder="Message" name="message" required></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
