@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Staff members{% endblock %}
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url({{ breadcrumb.breadcrumb_image.url }});">
+<div class="container">
+<div class="row no-gutters slider-text align-items-center justify-content-center">
+  <div class="col-md-9 ftco-animate text-center">
+    <h1 class="mb-2 bread">Staff members</h1>
+    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'homepage:home' %}">Home <i class="fa fa-angle-double-right"></i></a></span> <span>Team <i class="fa fa-angle-double-right"></i></span></p>
+  </div>
+</div>
+</div>
+</section>
+
+{% if members_section and members %}
+<section class="ftco-section darkening" id="xs">
+	<div class="container-fluid px-4">
+		<div class="row justify-content-center mb-5 pb-2">
+      <div class="col-md-8 text-center heading-section ftco-animate">
+        <h2 class="mb-4">{{ members_section.section_heading }}</h2>
+        <p>{{ members_section.section_paragraph_description }}</p>
+      </div>
+    </div>	
+	<div class="container-fluid px-4">
+		<div class="row">
+			{% for member in members %}
+            {% if member.user.is_staff %}
+			<div class="col-md-6 col-lg-3 ftco-animate">
+				<div class="staff">
+					<div class="img-wrap d-flex align-items-stretch">
+						<a href="{{ member.member_image.url }}" class="img align-self-stretch" style="background-image: url({{ member.member_image.url }});" target="_blank"></a>
+					</div>
+					<div class="pr-4 pl-4 pb-4 blog-cards text pt-3 text-center">
+						<h3>{{ member.user.get_full_name }}</h3>
+						<span class="position mb-2">{{ member.member_position }}</span>
+						<div class="faded">
+							<p>{{ member.about_member }}</p>
+							<ul class="ftco-social text-center">
+                {% for social_media in social_medias %}
+                {% if social_media.facebook_username %}
+                <li class="ftco-animate"><a href="{{social_media.facebook_username}}" target="_blank"><span class="fab fa-facebook"></span></a></li>
+                {% endif %}
+                {% if social_media.twitter_username %}
+                <li class="ftco-animate"><a href="{{social_media.twitter_username}}" target="_blank"><span class="fab fa-twitter"></span></a></li>
+                {% endif %}
+                {% if social_media.instagram_username %}
+                <li class="ftco-animate"><a href="{{social_media.instagram_username}}"target="_blank"><span class="fab fa-instagram"></span></a></li>
+                {% endif %}
+                {% if social_media.github_username %}
+                <li class="ftco-animate"><a href="https://github.com/{{social_media.github_username}}" target="_blank"><span class="fab fa-github"></span></a></li>
+                {% endif %}
+                {% if social_media.stack_overflow_user_id %}
+                <li class="ftco-animate"><a href="https://stackoverflow.com/users/{{social_media.stack_overflow_user_id}}" target="_blank"><span class="fab fa-stack-overflow"></span></a></li>
+                {% endif %}
+                {% if social_media.linkedin_username %}
+                <li class="ftco-animate"><a href="{{social_media.linkedin_username}}" target="_blank"><span class="fab fa-linkedin"></span></a></li>
+                {% endif %}
+                {% if social_media.dribble_username %}
+                <li class="ftco-animate"><a href="{{social_media.dribble_username}}" target="_blank"><span class="fab fa-dribble"></span></a></li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+			</div>
+			</div>
+			</div>
+            {% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+</section>
+{% endif %}
+{% endblock %}
