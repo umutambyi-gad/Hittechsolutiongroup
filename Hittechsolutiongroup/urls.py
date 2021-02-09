@@ -19,13 +19,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('Homepage.urls')),
-    path('about-us/', include('Aboutpage.urls')),
-    path('services/', include('Servicespage.urls')),
-    path('staff-members/', include('Memberspage.urls')),
-    path('blogs/', include('Blogpage.urls')),
-    path('contact/', include('Contactpage.urls')),
+    path(r'hittechsolutiongrouprwanda__admin/', admin.site.urls),
+    path(r'', include('Homepage.urls')),
+    path(r'about-us/', include('Aboutpage.urls')),
+    path(r'services/', include('Servicespage.urls')),
+    path(r'staff-members/', include('Memberspage.urls')),
+    path(r'blogs/', include('Blogpage.urls')),
+    path(r'contact/', include('Contactpage.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
