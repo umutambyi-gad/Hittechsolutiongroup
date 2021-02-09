@@ -1,1 +1,1 @@
-web: gunicorn Hittechsolutiongroup.wsgi
+web: gunicorn Hittechsolutiongroup.wsgi --log-file -
