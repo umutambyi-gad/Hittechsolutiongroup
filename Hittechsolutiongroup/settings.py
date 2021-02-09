@@ -94,13 +94,12 @@ WSGI_APPLICATION = 'Hittechsolutiongroup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'hit_tech_solution_group_database',
-        #'USER': 'Gad',
-        #'PASSWORD': '12345',
-        #'HOST': '127.0.0.1',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd1m18okl86h1ba',
+        'USER': 'gdgednlrmicepl',
+        'PASSWORD': '6f011f39ed8bee5ce6dc8ac58dfc4dab8eb44e9af728f0e6426f2ee971279592',
+        'HOST': 'ec2-35-171-57-132.compute-1.amazonaws.com',
+        'PORT': 5432
     }
 }
 
