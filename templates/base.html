@@ -352,7 +352,7 @@
                 </div>
                 <div>
                   <div class="d-flex justify-content-between mt-5 mb-2">
-                    <a href="#" class="btn btn-sm btn-info mr-4">Delete My Account</a>
+                    <a href="{% url 'memberspage:delete-profile' user.pk %}" class="btn btn-sm btn-info mr-4">Delete My Account</a>
                     <input type="submit" class="btn btn-sm btn-default float-right" value="Save changes">
                   </div>
                 </div>

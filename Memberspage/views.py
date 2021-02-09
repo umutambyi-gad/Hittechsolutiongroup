@@ -98,14 +98,14 @@ def signup(request):
 					member_image=''
 				)
 				membership.save()
-
+				messages.success(request, "Successfully signed up so click on signin button to signin")
 				return redirect(request.META['HTTP_REFERER'])
 		else:
 			messages.info(request, "Your passwords doesn't match")
 			return redirect(request.META['HTTP_REFERER'])
 
 
-	return redirect('/')
+	return redirect(request.META['HTTP_REFERER'])
 
 def signin(request):
 	if request.method == 'POST':
@@ -123,7 +123,7 @@ def signin(request):
 		else:
 			messages.info(request, "You entered invalid credentials")
 			return redirect(request.META['HTTP_REFERER'])
-	return redirect('/')
+	return redirect(request.META['HTTP_REFERER'])
 
 
 def signout(request):
@@ -203,5 +203,13 @@ def updateProfile(request, user_id):
 			}
 		)
 		member.save()
+		messages.success(request, 'Successfully user information updated')
+	
+	return redirect(request.META['HTTP_REFERER'])
 
+def deleteProfile(request, user_id):
+	user = User.objects.get(pk=user_id)
+	user.delete()
+	request.session.clear()
+	messages.success(request, 'User successfully deleted')
 	return redirect(request.META['HTTP_REFERER'])
