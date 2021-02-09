@@ -1,0 +1,1 @@
+web: gunicorn Hittechsolutiongroup.wsgi --log-file -
