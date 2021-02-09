@@ -26,7 +26,7 @@ SECRET_KEY = 'pivq9zpg_z5d7w2d713v6s6fcl-g-h^fhnpvhnzt0emol$9((2'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'hittechsolutiongrouprwanda.herokuapp.com/',
+    'hittechsolutiongrouprwanda.herokuapp.com',
     '127.0.0.1'
 ]
 
