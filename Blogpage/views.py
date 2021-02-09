@@ -51,6 +51,10 @@ def blog_single(request, blog_id, blog_title_slug):
         contents = formatting_(blog.blog_content)
 
         contacts = ContactForm.objects.all()
+
+        address = ''
+        number = ''
+        email = ''
         for contact in contacts:
             address = contact.address
             number = contact.contact_number
@@ -68,7 +72,20 @@ def blog_single(request, blog_id, blog_title_slug):
             'email': email
         }
         if request.is_ajax():
+            # delete comment
+            root_id = request.POST.get('root_id', None)
+            reply_id = request.POST.get('reply_id', None)
 
+            if root_id is not None:
+                RootComments.deleteRootComment(int(root_id.strip()))
+                return JsonResponse({
+                    'total_comments': RootComments.objects.count()
+                }, status=200)
+
+            if reply_id is not None:
+                ReplyComments.deleteReplyComment(int(reply_id.strip()))
+
+            # post comment
             root_comment_id = request.POST.get('root_comment_id', None)
             message = request.POST.get('ajax_message', None)
 
@@ -91,8 +108,7 @@ def blog_single(request, blog_id, blog_title_slug):
                     root_data.save()
 
             return ajax_operation(request)
-            
+                
         return render(request, 'blog-single.html', context)
-
     except Exception:
        return render(request, '404.html')

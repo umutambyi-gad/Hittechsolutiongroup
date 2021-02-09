@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Contact Us{% endblock %}
 {% block content %}
-<section class="hero-wrap hero-wrap-2" style="background-image: url({% if breadcrumb.breadcrumb_image.url != '' %}{{ breadcrumb.breadcrumb_image.url }}{% else %}{% static 'images\\default.jpg' %}{% endif %});">
+<section class="hero-wrap hero-wrap-2" style="background-image: url({{ breadcrumb.breadcrumb_image.url }});">
   <div class="container">
     <div class="row no-gutters slider-text align-items-center justify-content-center">
       <div class="col-md-9 ftco-animate text-center">

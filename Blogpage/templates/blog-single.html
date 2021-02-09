@@ -3,7 +3,7 @@
 {% block title %}Blog - {{blog.blog_title}}{% endblock %}
 {% block blog-active %}active{% endblock %}
 {% block content %}
-<section class="hero-wrap hero-wrap-2" style="background-image: url({% if breadcrumb.breadcrumb_image.url != '' %}{{ breadcrumb.breadcrumb_image.url }}{% else %}{% static 'images\\default.jpg' %}{% endif %});">
+<section class="hero-wrap hero-wrap-2" style="background-image: url({{ breadcrumb.breadcrumb_image.url }});">
  <div class="container">
   <div class="row no-gutters slider-text align-items-center justify-content-center">
    <div class="col-md-9 ftco-animate text-center">
@@ -51,16 +51,14 @@
       <a class="tag-cloud-link" href="#">
        {{ tags.tag }}
       </a>
-      {% comment %}
-      blogs_tagged = Blog.objects.filter(blog_tag__tag='tag_here')
-      {% endcomment %}
+      
       {% endfor %}
      </div>
     </div>
     {% if blog.user.username != 'Anonymous' %}
     <div class="row about-author d-flex p-4 blog-cards">
      <div class="col-sm-12 col-md-5 bio">
-      <img alt="Image placeholder" class="img-fluid mb-4" src="{{ blog.user.members.member_image.url }}"/>
+      <img alt="Image placeholder" class="img-fluid mb-4" src="{% if blog.user.members.member_image.url != '' %}{{ blog.user.members.member_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}"/>
      </div>
      <div class="col-sm-12 col-md-7 desc">
       <h3>
@@ -84,16 +82,13 @@
     {% endif %}
     <div class="pt-5 mt-5">
      <h3 class="mb-5 h4 font-weight-bold">
-      <!--{ blog.rootcomments_set.all.count }-->
-      {{ blog.rootcomments_set.all.count }} Comments
+      <span class="total">{{ blog.rootcomments_set.all.count }}</span> Comments
      </h3>
      <ul class="comment-list" id="comment-section">
       {% for root_comment in blog.rootcomments_set.all %}
       <li class="comment">
        <div class="vcard bio">
-        <a href="{{ root_comment.user.members.member_image.url }}" target="_blank">
-         <img alt="Image placeholder" height="53" src="{{ root_comment.user.members.member_image.url }}" width="50"/>
-        </a>
+         <img alt="Image placeholder" height="53" src="{% if root_comment.user.members.member_image.url != '' %}{{ root_comment.user.members.member_image.url }}{% else %}{% static 'images/default' %}{% endif %}" width="50"/>
        </div>
        <div class="comment-body">
         <h3>
@@ -109,6 +104,11 @@
          <a class="reply {{ root_comment.id }} {% if not user.is_authenticated %}notAuthenticated{% endif %}" href="#comment">
           Reply
          </a>
+         {% if user.id == root_comment.user.id %}
+         <a class="delete-root {{ root_comment.id }} {% if not user.is_authenticated %}notAuthenticated{% endif %} ml-3">
+          Delete
+         </a>
+         {% endif %}
         </p>
         {% if root_comment.replycomments_set.all %}
         <a class="showReplies">Show replies</a>
@@ -118,13 +118,7 @@
        <ul class="children">
         <li class="comment">
          <div class="vcard bio">
-            <img alt="Image placeholder" src="
-            {% if reply.user.members.member_image.url != '' %}
-              {{ reply.user.members.member_image.url }}
-            {% else %}
-              {% static 'images\default.jpg' %}
-            {% endif %}
-            " width="50" height="53" />
+            <img alt="Image placeholder" src="{% if reply.user.members.member_image.url != '' %}{{ reply.user.members.member_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" width="50" height="53" />
          </div>
          <div class="comment-body">
           <h3>
@@ -137,9 +131,14 @@
            {{ reply.commentor_message }}
           </p>
           <p>
-           <a class="reply {{ root_comment.id }} {% if not user.is_authenticated %}notAuthenticated{% endif %}" href="#comment">
+           <a class="reply {{ root_comment.id }}{% if not user.is_authenticated %}notAuthenticated{% endif %}" href="#comment">
             Reply
            </a>
+          {% if user.id == reply.user.id %}
+            <a class="delete-reply {{ reply.id }}{% if not user.is_authenticated %}notAuthenticated{% endif %} ml-3">
+            Delete
+            </a>
+          {% endif %}
           </p>
          </div>
         </li>
@@ -194,9 +193,7 @@
         </span>
        </a>
       </li>
-      {% comment %}
-      blogs_categoriesed = Blog.objects.filter(blogs_category__category='category_here')
-      {% endcomment %}
+      
       {% endfor %}
      </ul>
     </div>
@@ -206,11 +203,11 @@
      </h3>
      {% for blog in blogs %}
      <div class="block-21 mb-4 d-flex">
-      <a class="blog-img mr-4" href="{% url 'blogpage:blog' %}{{ blog.id }}/{{ blog.slug }}" style="background-image: url({{ blog.blog_thumbnail.url }});">
+      <a class="blog-img mr-4" href="{{ blog.get_absolute_url }}" style="background-image: url({{ blog.blog_thumbnail.url }});">
       </a>
       <div class="text">
        <h3 class="heading">
-        <a href="{% url 'blogpage:blog' %}{{ blog.id }}/{{ blog.slug }}">
+        <a href="{{ blog.get_absolute_url }}">
          {{ blog.blog_short_description }}
         </a>
        </h3>
