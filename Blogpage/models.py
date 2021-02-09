@@ -1,12 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.shortcuts import reverse
-
-
-user = User.objects.filter(username='Anonymous')
-user_id = [i.id for i in user][0] if user.count() > 0 else 1
-Anonymous_user_id = user_id
 
 
 # Create your models here.
