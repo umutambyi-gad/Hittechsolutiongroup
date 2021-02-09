@@ -83,7 +83,7 @@ def signup(request):
 		if password == confirm_password:
 			if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
 				messages.info(request, "May be username or email already exists in our database")
-				return redirect('/');
+				return redirect(request.META['HTTP_REFERER'])
 			else:
 				user = User.objects.create_user(
 					first_name=first_name,
@@ -99,10 +99,10 @@ def signup(request):
 				)
 				membership.save()
 
-				return redirect('/');
+				return redirect(request.META['HTTP_REFERER'])
 		else:
 			messages.info(request, "Your passwords doesn't match")
-			return redirect('/');
+			return redirect(request.META['HTTP_REFERER'])
 
 
 	return redirect('/')
@@ -119,17 +119,17 @@ def signin(request):
 		if user is not None:
 			auth.login(request, user)
 			messages.success(request, f"Successfully signed in as {request.user.username}")
-			return redirect('/')
+			return redirect(request.META['HTTP_REFERER'])
 		else:
 			messages.info(request, "You entered invalid credentials")
-			return redirect('/')
+			return redirect(request.META['HTTP_REFERER'])
 	return redirect('/')
 
 
 def signout(request):
 	auth.logout(request)
 	messages.success(request, "Successfully signed out")
-	return redirect('/')
+	return redirect(request.META['HTTP_REFERER'])
 
 
 def updateProfile(request, user_id):
@@ -204,4 +204,4 @@ def updateProfile(request, user_id):
 		)
 		member.save()
 
-	return redirect('/')
+	return redirect(request.META['HTTP_REFERER'])
