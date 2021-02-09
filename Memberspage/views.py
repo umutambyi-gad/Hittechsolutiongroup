@@ -134,6 +134,36 @@ def signout(request):
 
 def updateProfile(request, user_id):
 	if request.method == 'POST':
+		# user setting
+		username = request.POST.get('username', None)
+		email = request.POST.get('email', None)
+		firstname = request.POST.get('firstname', None)
+		lastname = request.POST.get('lastname', None)
+
+		if username is None or len(username.strip()) == 0:
+			username = request.user.username
+
+		if email is None or len(email.strip()) == 0:
+			email = request.user.email
+
+		if firstname is None or len(firstname.strip()) == 0:
+			firstname = request.user.first_name
+
+		if lastname is None or len(lastname.strip()) == 0:
+			lastname = request.user.last_name
+
+
+		user, created = User.objects.update_or_create(
+			pk=request.user.id,
+			defaults={
+			'username': username,
+			'email': email,
+			'first_name': firstname,
+			'last_name': lastname,
+			}
+		)
+
+		# members setting
 		membership = hasattr(request.user, 'members')
 		member_position = ('', request.user.members.member_position)[membership]
 		member_country = ('', request.user.members.member_country)[membership]
