@@ -135,10 +135,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '1025'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'umutambyig@gmail.com'
+EMAIL_HOST_PASSWORD = 'Rwandan artist'
 EMAIL_USE_TLS = True
 
 
