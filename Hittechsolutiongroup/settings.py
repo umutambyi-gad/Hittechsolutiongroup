@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'pivq9zpg_z5d7w2d713v6s6fcl-g-h^fhnpvhnzt0emol$9((2'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -95,9 +96,9 @@ WSGI_APPLICATION = 'Hittechsolutiongroup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd1m18okl86h1ba',
-        'USER': 'gdgednlrmicepl',
-        'PASSWORD': '6f011f39ed8bee5ce6dc8ac58dfc4dab8eb44e9af728f0e6426f2ee971279592',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'ec2-35-171-57-132.compute-1.amazonaws.com',
         'PORT': 5432
     }
@@ -137,10 +138,10 @@ USE_TZ = True
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'umutambyig@gmail.com'
-EMAIL_HOST_PASSWORD = 'Rwandan artist'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-
+DEFAULT_FROM_EMAIL = 'hittechsolutiongrouprwanda <noreply@hittechsolutiongrouprwanda.com>'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
