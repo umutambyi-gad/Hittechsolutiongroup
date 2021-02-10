@@ -46,7 +46,7 @@ def blog_single(request, blog_id, blog_title_slug):
         tags = Tags.objects.all()
         categories = Categories.objects.all()
         blog = Blogs.objects.get(pk=blog_id)
-        blogs = Blogs.objects.all()
+        popular_blogs = Blogs.objects.all()
 
         contents = formatting_(blog.blog_content)
 
@@ -64,7 +64,7 @@ def blog_single(request, blog_id, blog_title_slug):
            'tags': tags,
            'categories': categories,
            'blog': blog,
-           'blogs': blogs,
+           'popular_blogs': popular_blogs,
            'contents': contents,
            'breadcrumb': BlogBreadcrumb.objects.first(),
            'address': address,
@@ -79,7 +79,7 @@ def blog_single(request, blog_id, blog_title_slug):
             if root_id is not None:
                 RootComments.deleteRootComment(int(root_id.strip()))
                 return JsonResponse({
-                    'total_comments': RootComments.objects.count()
+                    'total_comments': int(RootComments.objects.count()) - 1
                 }, status=200)
 
             if reply_id is not None:

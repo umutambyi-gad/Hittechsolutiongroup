@@ -201,14 +201,14 @@
      <h3>
       Popular Articles
      </h3>
-     {% for blog in blogs %}
+     {% for popular_blog in popular_blogs %}
      <div class="block-21 mb-4 d-flex">
-      <a class="blog-img mr-4" href="{{ blog.get_absolute_url }}" style="background-image: url({{ blog.blog_thumbnail.url }});">
+      <a class="blog-img mr-4" href="{{ popular_blog.get_absolute_url }}" style="background-image: url({{ popular_blog.blog_thumbnail.url }});">
       </a>
       <div class="text">
        <h3 class="heading">
-        <a href="{{ blog.get_absolute_url }}">
-         {{ blog.blog_short_description }}
+        <a href="{{ popular_blog.get_absolute_url }}">
+         {{ popular_blog.blog_short_description }}
         </a>
        </h3>
        <div class="meta">
@@ -216,21 +216,21 @@
          <a href="#">
           <span class="fa fa-calendar-alt">
           </span>
-          {{ blog.blog_added_date.date }}
+          {{ popular_blog.blog_added_date.date }}
          </a>
         </div>
         <div>
          <a>
           <span class="fa fa-user">
           </span>
-          {{ blog.user.get_full_name }}
+          {{ popular_blog.user.get_full_name }}
          </a>
         </div>
         <div>
-         <a href="#">
+         <a href="{{popular_blog.get_absolute_url }}#comment-section">
           <span class="fa fa-comment-alt">
           </span>
-          {{ blog.rootcomments_set.count }}
+          <span {% if blog.id == popular_blog.id %}class="total"{% endif %}>{{ popular_blog.rootcomments_set.count }}</span>
          </a>
         </div>
        </div>
