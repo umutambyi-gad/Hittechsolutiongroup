@@ -96,8 +96,9 @@ WSGI_APPLICATION = 'Hittechsolutiongroup.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
         dj_database_url.config()
-    }
+        }
 }
 
 # Password validation
