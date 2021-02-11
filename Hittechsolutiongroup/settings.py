@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'Hittechsolutiongroup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME')
+        'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': 'ec2-35-171-57-132.compute-1.amazonaws.com',
