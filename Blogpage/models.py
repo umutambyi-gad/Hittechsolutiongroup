@@ -2,10 +2,12 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
+from cloudinary import CloudinaryField
+
 
 # Create your models here.
 class BlogBreadcrumb(models.Model):
-	breadcrumb_image = models.ImageField(upload_to='blogpage/images', default='')
+	breadcrumb_image = CloudinaryField('blogpage/images')
 	added_date = models.DateTimeField(auto_now_add=True)
 
 	def save(self, *args, **kwargs):
@@ -50,16 +52,16 @@ class Blogs(models.Model):
 	blog_title = models.CharField(max_length=300)
 	blog_short_description = models.TextField()
 	blog_content = models.TextField()
-	blog_thumbnail = models.ImageField(upload_to='blogpage/images')
+	blog_thumbnail = CloudinaryField('blogpage/images')
 	blog_category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 	blog_tag = models.ManyToManyField(Tags)
 	blog_author_description = models.TextField()
 	blog_added_date = models.DateTimeField(auto_now_add=True)
-	blog_image_1 = models.ImageField(upload_to='blogpage/images', null=True, blank=True)
-	blog_image_2 = models.ImageField(upload_to='blogpage/images', null=True, blank=True)
-	blog_image_3 = models.ImageField(upload_to='blogpage/images', null=True, blank=True)
-	blog_image_4 = models.ImageField(upload_to='blogpage/images', null=True, blank=True)
-	blog_image_5 = models.ImageField(upload_to='blogpage/images', null=True, blank=True)
+	blog_image_1 = CloudinaryField('blogpage/images', null=True, blank=True)
+	blog_image_2 = CloudinaryField('blogpage/images', null=True, blank=True)
+	blog_image_3 = CloudinaryField('blogpage/images', null=True, blank=True)
+	blog_image_4 = CloudinaryField('blogpage/images', null=True, blank=True)
+	blog_image_5 = CloudinaryField('blogpage/images', null=True, blank=True)
 
 	def slug(self):
 		return slugify(self.blog_title)

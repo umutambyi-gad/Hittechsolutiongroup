@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary import CloudinaryField
+
 
 # Create your models here.
 class HomeBackground(models.Model):
-	background_image = models.ImageField(upload_to='homepage/images')
+	background_image = CloudinaryField('homepage/images')
 	background_title = models.CharField(max_length=100)
 	background_description_paragraph = models.TextField()
 	added_date = models.DateTimeField(auto_now_add=True)
@@ -41,7 +43,7 @@ class HomeDisplayServices(models.Model):
 class WhatWeOfferSection(models.Model):
 	section_heading = models.CharField(max_length=30)
 	section_description_paragraph = models.TextField()
-	section_aside_image = models.ImageField(upload_to='homepage/images')
+	section_aside_image = CloudinaryField('homepage/images')
 
 	def save(self, *args, **kwargs):
 		if not self.pk and WhatWeOfferSection.objects.exists():
@@ -71,7 +73,7 @@ class WhatWeOffer(models.Model):
 
 class TestimonyAddingSection(models.Model):
 	testimony_section_heading = models.CharField(max_length=100)
-	testimonial_background = models.ImageField(upload_to='homepage/images')
+	testimonial_background = CloudinaryField('homepage/images')
 	testimony_section_description_paragraph = models.TextField()
 	
 	def save(self, *args, **kwargs):
@@ -118,7 +120,7 @@ class TestimonialSection(models.Model):
 
 
 class FooterGallery(models.Model):
-	image = models.ImageField(upload_to='homepage/images')
+	image = CloudinaryField('homepage/images')
 	added_date = models.DateTimeField(auto_now_add=True)
 
 	def save(self, *args, **kwargs):

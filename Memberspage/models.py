@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary import CloudinaryField
 
 
 # Create your models here.
 class MemberBreadcrumb(models.Model):
-	breadcrumb_image = models.ImageField(upload_to='memberspage/images', default='')
+	breadcrumb_image = CloudinaryField('memberspage/images')
 	added_date = models.DateTimeField(auto_now_add=True)
 
 	def save(self, *args, **kwargs):
@@ -41,7 +42,7 @@ class Members(models.Model):
 	member_position = models.CharField(max_length=60, blank=True, null=True)
 	member_country = models.CharField(max_length=60, blank=True, null=True)
 	member_city = models.CharField(max_length=60, blank=True, null=True)
-	member_image = models.ImageField(upload_to='memberspage/images', blank=True, null=True)
+	member_image = CloudinaryField('memberspage/images', blank=True, null=True)
 	about_member = models.TextField(blank=True, null=True)
 
 	def __str__(self):

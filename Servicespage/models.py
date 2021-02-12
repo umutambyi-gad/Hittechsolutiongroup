@@ -1,9 +1,9 @@
 from django.db import models
-
+from cloudinary import CloudinaryField
 
 # Create your models here.
 class ServicesBreadcrumb(models.Model):
-	breadcrumb_image = models.ImageField(upload_to='servicespage/images', default='')
+	breadcrumb_image = CloudinaryField('memberspage/images')
 	added_date = models.DateTimeField(auto_now_add=True)
 
 	def save(self, *args, **kwargs):

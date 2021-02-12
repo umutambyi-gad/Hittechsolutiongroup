@@ -1,9 +1,10 @@
 from django.db import models
+from cloudinary import CloudinaryField
 
 
 # Create your models here.
 class ContactBreadcrumb(models.Model):
-	breadcrumb_image = models.ImageField(upload_to='contactpage/images')
+	breadcrumb_image = CloudinaryField('contactpage/images')
 	added_date = models.DateTimeField(auto_now_add=True)
 
 	def save(self, *args, **kwargs):
