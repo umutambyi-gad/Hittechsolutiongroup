@@ -1,4 +1,5 @@
 {% load static %}
+{% load cloudinary %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +32,7 @@
               {% if user.is_authenticated %}
               <div id="profile" class="mt-5 col-md topper d-flex align-items-center justify-content-end">
                 <div class="icon d-flex justify-content-center align-items-center">
-                  <img src="{% if user.members.member_image.url != '' %}{{ user.members.member_image.url }}{% else %}{% static 'images\default.jpg' %}{% endif %}" class="rounded-circle" width="30" height="30">
+                  {% cloudinary data.image.url class="rounded-circle" height=30 width=30 %}
                 </div>
                 <div class="text">
                   <span></span>
@@ -192,7 +193,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="{% if user.members.member_image.url != '' %}{{ user.members.member_image.url }}{% else %}{% static 'images\default.jpg' %}{% endif %}" width="190" height="220">
+                    {% cloudinary data.image.url class="rounded-circle" height=220 width=190 %}
                   </a>
                 </div>
               </div>

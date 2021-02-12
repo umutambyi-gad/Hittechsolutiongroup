@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cloudinary %}
 {% load static %}
 {% block title %}Blog - {{ blog.blog_title }}{% endblock %}
 {% block blog-active %}active{% endblock %}
@@ -58,7 +59,7 @@
     {% if blog.user.username != 'Anonymous' %}
     <div class="row about-author d-flex p-4 blog-cards">
      <div class="col-sm-12 col-md-5 bio">
-      <img alt="Image placeholder" class="img-fluid mb-4" src="{% if blog.user.members.member_image.url != '' %}{{ blog.user.members.member_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}"/>
+      {% cloudinary blog.user.members.member_image.url class="img-fluid mb-4" %}
      </div>
      <div class="col-sm-12 col-md-7 desc">
       <h3>
@@ -88,7 +89,7 @@
       {% for root_comment in blog.rootcomments_set.all %}
       <li class="comment">
        <div class="vcard bio">
-         <img alt="Image placeholder" height="53" src="{% if root_comment.user.members.member_image.url != '' %}{{ root_comment.user.members.member_image.url }}{% else %}{% static 'images/default' %}{% endif %}" width="50"/>
+        {% cloudinary root_comment.user.members.member_image.url height=53 width=50 %}
        </div>
        <div class="comment-body">
         <h3>
@@ -118,7 +119,7 @@
        <ul class="children">
         <li class="comment">
          <div class="vcard bio">
-            <img alt="Image placeholder" src="{% if reply.user.members.member_image.url != '' %}{{ reply.user.members.member_image.url }}{% else %}{% static 'images/default.jpg' %}{% endif %}" width="50" height="53" />
+          {% cloudinary reply.user.members.member_image.url height=53 width=50 %}
          </div>
          <div class="comment-body">
           <h3>
