@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
-from cloudinary import CloudinaryField
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.

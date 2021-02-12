@@ -1,5 +1,5 @@
 from django.db import models
-from cloudinary import CloudinaryField
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class ServicesBreadcrumb(models.Model):
