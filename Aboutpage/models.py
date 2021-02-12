@@ -23,11 +23,11 @@ class HitTechSolutionGroupHistory(models.Model):
 	paragraph = models.TextField()
 	added_date = models.DateTimeField(auto_now_add=True)
 
-	image_1 = CloudinaryField('aboutpage/images'null=True, blank=True)
-	image_2 = CloudinaryField('aboutpage/images'null=True, blank=True)
-	image_3 = CloudinaryField('aboutpage/images'null=True, blank=True)
-	image_4 = CloudinaryField('aboutpage/images'null=True, blank=True)
-	image_5 = CloudinaryField('aboutpage/images'null=True, blank=True)
+	image_1 = CloudinaryField('aboutpage/images', null=True, blank=True)
+	image_2 = CloudinaryField('aboutpage/images', null=True, blank=True)
+	image_3 = CloudinaryField('aboutpage/images', null=True, blank=True)
+	image_4 = CloudinaryField('aboutpage/images', null=True, blank=True)
+	image_5 = CloudinaryField('aboutpage/images', null=True, blank=True)
 
 	def __str__(self):
 		return self.title
@@ -41,7 +41,7 @@ class HitTechSolutionGroupHistory(models.Model):
 class StatisticSection(models.Model):
 	title = models.CharField(max_length=500)
 	paragraraph = models.TextField()
-	background_image = CloudinaryField('aboutpage/images'null=True, blank=True)
+	background_image = CloudinaryField('aboutpage/images', null=True, blank=True)
 
 	def save(self, *args, **kwargs):
 		if not self.pk and StatisticSection.objects.exists():
