@@ -32,7 +32,7 @@
               {% if user.is_authenticated %}
               <div id="profile" class="mt-5 col-md topper d-flex align-items-center justify-content-end">
                 <div class="icon d-flex justify-content-center align-items-center">
-                  {% cloudinary data.image.url class="rounded-circle" height=30 width=30 %}
+                  {% cloudinary user.members.member_image.url class="rounded-circle" height=30 width=30 %}
                 </div>
                 <div class="text">
                   <span></span>
@@ -193,7 +193,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    {% cloudinary data.image.url class="rounded-circle" height=220 width=190 %}
+                    {% cloudinary user.members.member_image.url class="rounded-circle" height=220 width=190 %}
                   </a>
                 </div>
               </div>
