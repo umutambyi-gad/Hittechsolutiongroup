@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'Memberspage',
     'Blogpage',
     'Contactpage',
-    'django_cleanup'
 ]
 
 MIDDLEWARE = [
