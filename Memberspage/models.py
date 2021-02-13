@@ -53,6 +53,7 @@ class Members(models.Model):
 
 
 class SocialMediaForStaffUsers(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	member = models.OneToOneField(Members, on_delete=models.CASCADE)
 	twitter_username = models.CharField(max_length=100, null=True, blank=True)
 	instagram_username = models.CharField(max_length=100, null=True, blank=True)

@@ -59,7 +59,9 @@ class SocialMediaForStaffUsersAdmin(admin.ModelAdmin):
 		}),
 	)
 	def save_model(self, request, obj, form, change):
-		obj.member = request.user.members
+		user = request.user
+		obj.user = user
+		obj.member = user.members
 		super().save_model(request, obj, form, change)
 
 admin.site.register(SocialMediaForStaffUsers, SocialMediaForStaffUsersAdmin)
