@@ -49,8 +49,8 @@ def team(request):
 		
 	members_section = StaffMembersSection.objects.first()
 	members = Members.objects.all()
-	social_medias = SocialMediaForStaffUsers.objects.all()
 	contacts = ContactForm.objects.all()
+	
 	address = ''
 	number = ''
 	email = ''
@@ -61,7 +61,6 @@ def team(request):
 	context = {
 	'members_section': members_section,
 	'members': members,
-	'social_medias': social_medias,
 	'breadcrumb': MemberBreadcrumb.objects.first(),
 	'address': address,
 	'number': number,

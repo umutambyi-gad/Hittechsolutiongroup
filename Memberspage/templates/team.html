@@ -37,33 +37,31 @@
 						<div class="faded">
 							<p>{{ member.about_member }}</p>
 							<ul class="ftco-social text-center">
-                {% for social_media in social_medias %}
-                {% if social_media.facebook_username %}
-                <li class="ftco-animate"><a href="https:facebook.com/{{social_media.facebook_username}}" target="_blank"><span class="fab fa-facebook"></span></a></li>
-                {% endif %}
-                {% if social_media.twitter_username %}
-                <li class="ftco-animate"><a href="https://twitter.com/{{social_media.twitter_username}}" target="_blank"><span class="fab fa-twitter"></span></a></li>
-                {% endif %}
-                {% if social_media.instagram_username %}
-                <li class="ftco-animate"><a href="https://instagram.com/{{social_media.instagram_username}}"target="_blank"><span class="fab fa-instagram"></span></a></li>
-                {% endif %}
-                {% if social_media.github_username %}
-                <li class="ftco-animate"><a href="https://github.com/{{social_media.github_username}}" target="_blank"><span class="fab fa-github"></span></a></li>
-                {% endif %}
-                {% if social_media.stack_overflow_user_id %}
-                <li class="ftco-animate"><a href="https://stackoverflow.com/users/{{social_media.stack_overflow_user_id}}" target="_blank"><span class="fab fa-stack-overflow"></span></a></li>
-                {% endif %}
-                {% if social_media.linkedin_username %}
-                <li class="ftco-animate"><a href="https://linkedin.com/{{social_media.linkedin_username}}" target="_blank"><span class="fab fa-linkedin"></span></a></li>
-                {% endif %}
-                {% if social_media.dribble_username %}
-                <li class="ftco-animate"><a href="https://dribble.com/{{social_media.dribble_username}}" target="_blank"><span class="fab fa-dribble"></span></a></li>
-                {% endif %}
-                {% endfor %}
-              </ul>
-            </div>
-			</div>
-			</div>
+                                {% if member.socialmediaforstaffusers.facebook_username %}
+                                <li class="ftco-animate"><a href="https:facebook.com/{{ member.socialmediaforstaffusers.facebook_username }}" target="_blank"><span class="fab fa-facebook"></span></a></li>
+                                {% endif %}
+                                {% if member.socialmediaforstaffusers.twitter_username %}
+                                <li class="ftco-animate"><a href="https://twitter.com/{{ member.socialmediaforstaffusers.twitter_username }}" target="_blank"><span class="fab fa-twitter"></span></a></li>
+                                {% endif %}
+                                {% if member.socialmediaforstaffusers.instagram_username %}
+                                <li class="ftco-animate"><a href="https://instagram.com/{{ member.socialmediaforstaffusers.instagram_username }}"target="_blank"><span class="fab fa-instagram"></span></a></li>
+                                {% endif %}
+                                {% if member.socialmediaforstaffusers.github_username %}
+                                <li class="ftco-animate"><a href="https://github.com/{{ member.socialmediaforstaffusers.github_username }}" target="_blank"><span class="fab fa-github"></span></a></li>
+                                {% endif %}
+                                {% if member.socialmediaforstaffusers.stack_overflow_user_id %}
+                                <li class="ftco-animate"><a href="https://stackoverflow.com/users/{{ member.socialmediaforstaffusers.stack_overflow_user_id }}" target="_blank"><span class="fab fa-stack-overflow"></span></a></li>
+                                {% endif %}
+                                {% if member.socialmediaforstaffusers.linkedin_username %}
+                                <li class="ftco-animate"><a href="https://www.linkedin.com/in/{{ member.socialmediaforstaffusers.linkedin_username }}" target="_blank"><span class="fab fa-linkedin"></span></a></li>
+                                {% endif %}
+                                {% if member.socialmediaforstaffusers.dribble_username %}
+                                <li class="ftco-animate"><a href="https://dribble.com/{{ member.socialmediaforstaffusers.dribble_username }}" target="_blank"><span class="fab fa-dribble"></span></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+			        </div>
+			    </div>
 			</div>
             {% endif %}
 			{% endfor %}
