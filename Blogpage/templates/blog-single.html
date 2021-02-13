@@ -2,6 +2,15 @@
 {% load cloudinary %}
 {% load static %}
 {% block title %}Blog - {{ blog.blog_title }}{% endblock %}
+{% block metas %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="Umutambyi Gad" />
+<meta name="keywords" content="Hit tech solution group, Hit tech solution group Rwanda, {{ blog.blog_title }}" />
+<meta name="description" content="{{ blog.blog_title }} - tech company or IT company Hit tech solution group in Rwanda" />
+
+{% endblock %}
 {% block blog-active %}active{% endblock %}
 {% block content %}
 <section class="hero-wrap hero-wrap-2" style="background-image: url({{ breadcrumb.breadcrumb_image.url }});">

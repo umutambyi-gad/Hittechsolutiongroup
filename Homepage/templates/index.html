@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Home{% endblock %}
+{% block metas %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="author" content="Umutambyi Gad" />
+<meta name="keywords" content="Hit tech solution group, Hit tech solution group Rwanda, tech company in Rwanda, ICT" />
+<meta name="description" content="Official public website of tech company or IT company Hit tech solution group in Rwanda" />
+
+{% endblock %}
 {% block content %}
 <section class="home-slider owl-carousel">
   {% for background in backgrounds %}
