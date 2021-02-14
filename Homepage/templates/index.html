@@ -130,17 +130,17 @@
       <div class="col-md-12">
         <div class="carousel-testimony owl-carousel">
           {% for testimony in testimonies %}
-          <div class="item">
+          <div class="item {{ testimony.user.id }}">
             <div class="testimony-wrap d-flex">
-              <div class="user-img mr-4" style="background-image: url({{ testimony.user.members.member_image.url }})">
+              <div class="user-img {{ testimony.user.id }} mr-4" style="background-image: url({{ testimony.user.members.member_image.url }})">
               </div>
               <div class="text ml-2">
-              	<span class="quote d-flex align-items-center justify-content-center">
+                <span class="quote d-flex align-items-center justify-content-center">
                   <i class="fa fa-quote-left"></i>
                 </span>
-                <p>{{ testimony.testimony }}</p>
-                <p class="name">{{ testimony.user.get_full_name }}</p>
-                <span class="position">{{ testimony.user.members.member_position }}</span>
+                <p class="message {{ testimony.user.id }}">{{ testimony.testimony }}</p>
+                <p class="name {{ testimony.user.id }}">{{ testimony.user.get_full_name }}</p>
+                <span class="position {{ testimony.user.id }}">{{ testimony.user.members.member_position }}</span>
               </div>
             </div>
           </div>
@@ -154,32 +154,32 @@
 
 {% if user.is_authenticated and testimonial_adding %}
 <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url({{ testimonial_adding.testimonial_background.url }});">
-	<div class="container">
-		<div class="row justify-content-end">
-			<div class="col-md-6 py-5 px-md-5">
-				<div class="py-md-5">
-	          <div class="heading-section heading-section-white ftco-animate mb-5">
-	            <h2 class="mb-4">{{testimonial_adding.testimony_section_heading}}</h2>
-	            <p>{{ testimonial_adding.testimony_section_description_paragraph }}</p>
-	          </div>
-	          <form action="{% url 'homepage:home' %}" class="appointment-form ftco-animate" method="POST" enctype="multipart/form-data">
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-md-6 py-5 px-md-5">
+        <div class="py-md-5">
+            <div class="heading-section heading-section-white ftco-animate mb-5">
+              <h2 class="mb-4">{{testimonial_adding.testimony_section_heading}}</h2>
+              <p>{{ testimonial_adding.testimony_section_description_paragraph }}</p>
+            </div>
+            <form action="{% url 'homepage:home' %}" class="appointment-form ftco-animate" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
-	    				<div class="row">
+              <div class="row">
               <div class="col-lg-12">
                 <div class="form-group">
-                  <textarea cols="30" rows="5" class="form-control" placeholder="Message here" name="message" required></textarea>
+                  <textarea cols="30" rows="5" class="testimonial-message form-control" placeholder="Message here" name="message" required></textarea>
                 </div>
               </div>
-	    				<div class="col-lg-5 ml-auto mt-2">
-		            <div class="form-group ml-md-4">
-		              <input type="submit" value="Post" class="btn btn-primary py-3 px-4">
-		            </div>
-	    				</div>
-	    			</form>
-	    		</div>
-			</div>
+              <div class="col-lg-5 ml-auto mt-2">
+                <div class="form-group ml-md-4">
+                  <input type="submit" value="Post" class="btn btn-primary py-3 px-4">
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
     </div>
-	</div>
+  </div>
 </section>
 {% endif %}
 {% if galleries %}
