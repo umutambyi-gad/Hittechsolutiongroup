@@ -5,11 +5,28 @@ from Blogpage.models import Blogs
 from calendar import month_abbr
 from django.conf import settings
 from Memberspage.views import ajax_operation
+from django.http import JsonResponse
 
 
 # Create your views here.
 def home(request):
 	if request.is_ajax():
+		message = request.POST.get('message', None)
+		if message not in ('', None):
+			testimony, created = TestimonyAuthor.objects.update_or_create(
+				user=request.user,
+				defaults={
+					'testimony': message
+				}
+			)
+			testimony.save()
+			
+			return JsonResponse({
+				'isUpdate': TestimonyAuthor.objects.filter(user=request.user.id).exists(),
+				'user_id': request.user.id,
+				'message': message,
+			}, status=200);
+
 		return ajax_operation(request)
 	context = {}
 	
