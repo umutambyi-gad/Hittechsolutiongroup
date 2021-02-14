@@ -139,16 +139,16 @@ def updateProfile(request, user_id):
 		firstname = request.POST.get('firstname', None)
 		lastname = request.POST.get('lastname', None)
 
-		if username is None or len(username.strip()) == 0:
+		if username is None or username.strip() == '':
 			username = request.user.username
 
-		if email is None or len(email.strip()) == 0:
+		if email is None or email.strip() == '':
 			email = request.user.email
 
-		if firstname is None or len(firstname.strip()) == 0:
+		if firstname is None or firstname.strip() == '':
 			firstname = request.user.first_name
 
-		if lastname is None or len(lastname.strip()) == 0:
+		if lastname is None or lastname.strip() == '':
 			lastname = request.user.last_name
 
 
