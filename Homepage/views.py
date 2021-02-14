@@ -28,20 +28,7 @@ def home(request):
 			}, status=200);
 
 		return ajax_operation(request)
-	context = {}
 	
-	if request.method == 'POST':
-
-		message = request.POST['message']
-		testimony, created = TestimonyAuthor.objects.update_or_create(
-			user=request.user,
-			defaults={
-				'testimony': message
-			}
-		)
-		testimony.save()
-		return redirect('/')
-
 	home_background = HomeBackground.objects.all()
 	home_services = HomeDisplayServices.objects.all()
 	testimonial_section = TestimonialSection.objects.first()
@@ -67,19 +54,19 @@ def home(request):
 		suffer = month_abbr[i.blog_added_date.month]
 	
 	context = {
-				'backgrounds': home_background,
-				'services': home_services,
-				'testimonial_section': testimonial_section,
-				'testimonies': testimonies,
-				'testimonial_adding': testimonial_adding_section,
-				'offer_section': offer_section,
-				'we_offer': we_offer,
-				'galleries':  galleries,
-				'recent_blogs': recent_blogs,
-				'suffer': suffer,
-				'address': address,
-				'number': number,
-				'email': email
-			}
+		'backgrounds': home_background,
+		'services': home_services,
+		'testimonial_section': testimonial_section,
+		'testimonies': testimonies,
+		'testimonial_adding': testimonial_adding_section,
+		'offer_section': offer_section,
+		'we_offer': we_offer,
+		'galleries':  galleries,
+		'recent_blogs': recent_blogs,
+		'suffer': suffer,
+		'address': address,
+		'number': number,
+		'email': email
+	}
 
 	return render(request, 'index.html', context)
