@@ -571,7 +571,7 @@ AOS.init({
     });
 
 
-    /* delete root comment */
+    /* delete a root comment */
     $('.delete-root').on('click', function() {
         let data = {
             root_id: $(this).attr('class').split(' ')[1]
@@ -584,7 +584,7 @@ AOS.init({
         ajaxRequest('POST', data, success);
     });
 
-    /* delete reply comment */
+    /* delete a reply comment */
     $('.delete-reply').on('click', function() {
         let data = {
             reply_id: $(this).attr('class').split(' ')[1]
