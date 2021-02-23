@@ -3,7 +3,6 @@ from django.views.generic import View
 from .models import *
 from Contactpage.models import *
 from django.http import JsonResponse
-from scripts.script import formatting_
 from calendar import month_abbr
 from Memberspage.views import ajax_operation
 
@@ -48,7 +47,7 @@ def blog_single(request, blog_id, blog_title_slug):
         blog = Blogs.objects.get(pk=blog_id)
         popular_blogs = Blogs.objects.all()
 
-        contents = formatting_(blog.blog_content)
+        contents = blog.blog_content
 
         contacts = ContactForm.objects.all()
 
