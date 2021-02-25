@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import *
 from Contactpage.models import *
 from Homepage.models import *
-from scripts.script import formatting
 from Memberspage.views import ajax_operation
 
 
