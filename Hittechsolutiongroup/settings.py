@@ -182,4 +182,73 @@ cloudinary.config(
     api_secret = os.environ.get('api_secret')
 )
 
+ADMIN_REORDER = (
+    {
+        'app': 'auth',
+        'models': (
+            'auth.User',
+            'auth.Group',
+        )
+    },
+    {
+        'app': 'Homepage',
+        'models': (
+            'Homepage.HomeBackground',
+            'Homepage.HomeDisplayServices',
+            'Homepage.WhatWeOfferSection',
+            'Homepage.WhatWeOffer',
+            'Homepage.TestimonialSection',
+            'Homepage.TestimonyAddingSection',
+            'Homepage.TestimonyAuthor',
+            'Homepage.FooterGallery',
+        )
+    },
+    {
+        'app': 'Aboutpage',
+        'models': (
+            'Aboutpage.AboutBreadcrumb',
+            'Aboutpage.HitTechSolutionGroupHistory',
+            'Aboutpage.StatisticSection',
+            'Aboutpage.Statistics',
+        )
+    },
+    {
+        'app': 'Servicespage',
+        'models': (
+            'Servicespage.ServicesBreadcrumb',
+            'Servicespage.ServicesSection',
+            'Servicespage.Services',
+            'Servicespage.KeyFeatureSection',
+            'Servicespage.KeyFeatures',
+        )
+    },
+    {
+        'app': 'Memberspage',
+        'models': (
+            'Memberspage.MemberBreadcrumb',
+            'Memberspage.StaffMembersSection',
+            'Memberspage.Members',
+            'Memberspage.SocialMediaForStaffUsers',
+        )
+    },
+    {
+        'app': 'Blogpage',
+        'models': (
+            'Blogpage.BlogBreadcrumb',
+            'Blogpage.Blogs',
+            'Blogpage.Categories',
+            'Blogpage.Tags',
+            'Blogpage.RootComments',
+            'Blogpage.ReplyComments',
+        )
+    },
+    {
+        'app': 'Contactpage',
+        'models': (
+            'Contactpage.ContactForm',
+            'Contactpage.ContactForm',
+        )
+    },
+)
+
 django_heroku.settings(locals())
