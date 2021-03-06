@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import cloudinary
 import django_heroku
-from decouple import config
+from decouple import config, Csv
+import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,13 +28,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    'hittechsolutiongroup.herokuapp.com',
-    '127.0.0.1'
-]
-
+config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
 
 # Application definition
 
@@ -51,7 +48,7 @@ INSTALLED_APPS = [
     'Memberspage',
     'Blogpage',
     'Contactpage',
-    'admin_reorder'
+    'admin_reorder',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'admin_reorder.middleware.ModelAdminReorder'
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'Hittechsolutiongroup.urls'
@@ -101,11 +98,6 @@ WSGI_APPLICATION = 'Hittechsolutiongroup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'PORT': os.environ.get('DB_PORT')
     }
 }
 
@@ -152,12 +144,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -177,9 +169,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 cloudinary.config(
-    cloud_name = os.environ.get('cloud_name'),
-    api_key = os.environ.get('api_key'),
-    api_secret = os.environ.get('api_secret')
+    cloud_name = config('cloud_name'),
+    api_key = config('api_key'),
+    api_secret = config('api_secret')
 )
 
 ADMIN_REORDER = (
@@ -251,4 +243,5 @@ ADMIN_REORDER = (
     },
 )
 
+DATABASES['default'] = dj_database_url.config()
 django_heroku.settings(locals())
