@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'Memberspage',
     'Blogpage',
     'Contactpage',
+    'admin_reorder'
 ]
 
 MIDDLEWARE = [
