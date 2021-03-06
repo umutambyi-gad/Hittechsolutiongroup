@@ -101,7 +101,7 @@ DATABASES = {
     }
 }
 
-if DEBUG:
+if config('DEV_MODE', cast=bool, default=False):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
