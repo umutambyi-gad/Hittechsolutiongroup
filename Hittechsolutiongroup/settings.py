@@ -245,7 +245,7 @@ ADMIN_REORDER = (
     {
         'app': 'Contactpage',
         'models': (
-            'Contactpage.ContactForm',
+            'Contactpage.ContactBreadcrumb',
             'Contactpage.ContactForm',
         )
     },
