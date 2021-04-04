@@ -21,4 +21,4 @@ Hit tech solution group is Information Technology campany from Rwanda which has 
 **Email:** [umutambyig@gmail.com](mailto:umutambyig@gmail.com) <br>
 
 ## Live link
-[hittechsolutiongroup](www.hittechsolutiongroup.herokuapp.com)
+[hittechsolutiongroup](https://hittechsolutiongroup.herokuapp.com)
