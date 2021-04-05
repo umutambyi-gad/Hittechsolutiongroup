@@ -1,13 +1,5 @@
 ## hittechsolutiongroup
-Official website of Hit tech solution group in Rwanda
-
-## Table of content
-<ul>
-  <li><b><a href="#description">Description</a></b></li>
-  <li><b><a href="#author">Author</a></b></li>
-  <li><b><a href="#live-link">Live link</a></b></li>
-</ul>
-
+Website of Hit tech solution group in Rwanda
 
 ## Description
 Hit tech solution group is Information Technology campany from Rwanda which has many services like coding as services, website design and development, CCTV camera installation and many more just visit the [web here](https://hittechsolutiongroup.herokuapp.com) for more information.
