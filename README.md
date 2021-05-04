@@ -1,6 +1,6 @@
 ## Hittechsolutiongroup
 
-Website of Hit tech solution group in Rwanda
+Official website of Hit tech solution group in Rwanda
 
 ## Description
 
