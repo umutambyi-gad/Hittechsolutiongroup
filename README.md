@@ -1,4 +1,4 @@
-## hittechsolutiongroup
+## Hittechsolutiongroup
 
 Website of Hit tech solution group in Rwanda
 
