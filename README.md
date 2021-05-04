@@ -21,3 +21,7 @@ Hit tech solution group is Information Technology company from Rwanda which has 
 ## License
 
 No license
+
+## Contact
+
+<a href="mailto:umutambyig@gmail.com">Umutambyi Gad</a>
