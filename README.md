@@ -24,4 +24,4 @@ No license
 
 ## Contact
 
-<a href="mailto:umutambyig@gmail.com">Umutambyi Gad</a>
+<a href="mailto:umutambyig@gmail.com">umutambyig@gmail.com</a>
